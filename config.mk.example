@@ -1,0 +1,27 @@
+# Example for Makefile configuration options
+# Copy this to config.mk and either download the required software packages
+# and extract them to an arbitrary directory or install them
+# with your package manager. Only set each variable once!
+
+# ARM toolchain prefix for arm-none-eabi target
+# see https://launchpad.net/gcc-arm-embedded/+download
+#TOOLCHAIN_STM32        ?= /opt/gcc-arm-none-eabi-5_3-2016q1/bin/arm-none-eabi-
+
+# Toolchain for posix device target
+# see https://wiki.debian.org/CrossToolchains
+#TOOLCHAIN_POSIX_DEV    ?= arm-linux-gnueabihf-
+
+# Toolchain for local posix target
+# can be left empy most of the time
+#TOOLCHAIN_POSIX_LOCAL  :=
+
+# IP and username for the ssh-connection with the posix device
+#POSIX_DEV_IP := 192.168.0.15
+#POSIX_DEV_USERNAME := pi
+
+# Path to FreeRTOS source, see http://www.freertos.org
+#FREERTOS_PREFIX ?= $(HOME)/.local/FreeRTOS_V9.0.0rc2/
+
+# Path to the st-flash binary, see https://github.com/texane/stlink
+#ST_FLASH ?= $(HOME)/.local/stlink/st-flash
+#ST_FLASH ?= /usr/bin/st-flash

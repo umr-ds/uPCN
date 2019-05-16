@@ -1,0 +1,1 @@
+../../../../hal/include/stm32/hal_defines.h

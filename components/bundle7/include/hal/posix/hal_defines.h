@@ -1,0 +1,1 @@
+../../../../hal/include/posix/hal_defines.h

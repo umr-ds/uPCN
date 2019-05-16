@@ -1,0 +1,25 @@
+#Configuration file for editors supported 
+#by various editors directly or via plug-in.
+#See http://editorconfig.org/ for details.
+
+# top-most EditorConfig file
+root = true
+
+# Unix-style newlines with a newline ending every file
+[*]
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_size = 4
+
+# Tab indentation
+[{Makefile,*.mk,*.c,*.h}]
+indent_style = tab
+
+[{*.c,*.h}]
+indent_size = 8
+
+# Space indentation
+[*.py]
+charset = utf-8
+indent_style = space

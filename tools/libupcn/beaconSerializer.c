@@ -1,0 +1,1 @@
+../../components/upcn/src/beaconSerializer.c

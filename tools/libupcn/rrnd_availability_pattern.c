@@ -1,0 +1,1 @@
+../../components/upcn/src/rrnd_availability_pattern.c
