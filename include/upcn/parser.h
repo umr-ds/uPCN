@@ -24,6 +24,11 @@ enum parser_flags {
 	 * indicates that the parser failed due to an invalid CRC.
 	 */
 	PARSER_FLAG_CRC_INVALID = 0x04,
+
+	/**
+	 * The parser is forwarding data to a subparser.
+	 */
+	PARSER_FLAG_DATA_SUBPARSER = 0x08,
 };
 
 struct parser {
@@ -32,13 +37,11 @@ struct parser {
 	void *next_buffer;
 
 	/**
-	 * ---------
-	 * Bulk read
-	 * ---------
-	 *
-	 * If an  parser is operating in "bulk read" mode, this field states
+	 * If a parser is operating in "bulk read" mode, this field states
 	 * how many bytes have to be read into the "next_buffer" until the
 	 * input processor forwards the data to the the parser.
+	 * If a parser is performing subparser forwarding, this field states
+	 * the amount of bytes to be forwarded.
 	 */
 	size_t next_bytes;
 };

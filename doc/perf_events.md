@@ -105,10 +105,6 @@ static void forward_to_specific_parser(uint8_t byte)
             cur_parser = bundle7_parser.basedata;
             PERF(bundle7_parser_read_byte(&bundle7_parser, byte));
             break;
-        case INPUT_TYPE_BEACON_DATA:
-            cur_parser = beacon_parser.basedata;
-            beacon_parser_read_byte(&beacon_parser, byte);
-            break;
         default:
             reset_parser();
             return;

@@ -7,18 +7,14 @@ C implementation of the Bundle Protcol v7 as specified in the [IETF Draft].
 
 ### upcn
 
-The **bundle7** library requires some header files of the **upcn** library. The
-header files are currently symlinked directly into the bundle7 include
-directory. The only implementation needed from the upcn library is the
-`eidManager`.
+The **bundle7** library requires some header files of the **upcn** library as
+well as its generic bundle functions from `bundle.c`, `bundle_fragmenter.c*`
+and a small part of its platform abstraction, namely `hal_time`.
+
+### TinyCBOR
+
+The [TinyCBOR] library is required for parsing and serializing bundle7 data.
 
 
-### Hardware Abstraction Layer
-
-Because upcn uses an hardware abstraction layer (hal) with a custom memory
-allocation implementation for the STM32M4 board, we have to include a subset of
-the hal header files. Platform specific definitions are in the
-`include/{posix,stm32}` directories.
-
-
-[IETF Draft]: [https://tools.ietf.org/html/draft-ietf-dtn-bpbis-06]
+[IETF Draft]: [https://tools.ietf.org/html/draft-ietf-dtn-bpbis-13]
+[TinyCBOR]: https://github.com/intel/tinycbor/

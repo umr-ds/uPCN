@@ -1,9 +1,10 @@
 #ifndef BUNDLE7_EID_H_INCLUDED
 #define BUNDLE7_EID_H_INCLUDED
 
-#include <stdint.h>  // uint*_t
-#include <stdlib.h>  // size_t
 #include "cbor.h"
+
+#include <stddef.h>  // size_t
+#include <stdint.h>  // uint*_t
 
 
 // -------------------------------------

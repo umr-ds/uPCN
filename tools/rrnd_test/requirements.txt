@@ -1,8 +1,0 @@
-pyzmq
-nose
-numpy
-scipy
-flake8
-skyfield
-pyephem
-matplotlib

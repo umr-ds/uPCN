@@ -1,12 +1,14 @@
 #ifndef BUNDLE6_PARSER_H_INCLUDED
 #define BUNDLE6_PARSER_H_INCLUDED
 
-#include <stdint.h>
+#include "bundle6/bundle6.h"
+#include "bundle6/sdnv.h"
 
-#include "upcn/upcn.h"
-#include "upcn/parser.h"
 #include "upcn/bundle.h"
-#include "upcn/sdnv.h"
+#include "upcn/parser.h"
+#include "upcn/result.h"
+
+#include <stdint.h>
 
 /**
  * Represents the part of the bundle the parser is currently processing
@@ -67,7 +69,8 @@ enum bundle6_parser_error {
  */
 struct bundle6_parser {
 	struct parser *basedata;
-	void (*send_callback)(struct bundle *);
+	void (*send_callback)(struct bundle *, void *);
+	void *send_param;
 
 	enum bundle6_parser_error error;
 
@@ -83,13 +86,25 @@ struct bundle6_parser {
 	uint32_t current_index;
 	uint32_t current_size;
 
+	struct bundle6_eid_reference destination_eidref;
+	struct bundle6_eid_reference source_eidref;
+	struct bundle6_eid_reference report_to_eidref;
+	struct bundle6_eid_reference custodian_eidref;
+	struct bundle6_eid_reference cur_eidref;
+
+	uint16_t dict_length;
+	char *dict;
+
 	struct bundle_block_list **current_block_entry;
 	uint8_t last_block;
 };
 
 struct parser *bundle6_parser_init(
-	struct bundle6_parser *state, void (*send_callback)(struct bundle *));
+	struct bundle6_parser *state,
+	void (*send_callback)(struct bundle *, void *), void *param);
 enum upcn_result bundle6_parser_reset(struct bundle6_parser *state);
+enum upcn_result bundle6_parser_deinit(struct bundle6_parser *state);
+
 size_t bundle6_parser_read(struct bundle6_parser *state,
 	const uint8_t *buffer, size_t length);
 

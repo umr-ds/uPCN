@@ -1,6 +1,11 @@
-#include <stdbool.h>
-#include <stdint.h>
+#ifndef BUNDLE7_HOPCOUNT_H_INCLUDED
+#define BUNDLE7_HOPCOUNT_H_INCLUDED
+
 #include "upcn/bundle.h"
+
+#include <stdbool.h>
+#include <stddef.h>
+#include <stdint.h>
 
 
 /**
@@ -39,3 +44,5 @@ bool bundle7_hop_count_parse(struct bundle_hop_count *hop_count,
  */
 size_t bundle7_hop_count_serialize(const struct bundle_hop_count *hop_count,
 	uint8_t *buffer, size_t length);
+
+#endif // BUNDLE7_HOPCOUNT_H_INCLUDED

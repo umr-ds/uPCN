@@ -1,11 +1,12 @@
 #ifndef SPP_PARSER_H
 #define SPP_PARSER_H
 
-#include <stddef.h>
-#include <stdint.h>
+#include "spp/spp_internal.h"
 
 #include "upcn/parser.h"
-#include "spp/spp_internal.h"
+
+#include <stddef.h>
+#include <stdint.h>
 
 enum spp_parser_state {
 	SPP_PARSER_STATE_PH_P1_MSB = 0,

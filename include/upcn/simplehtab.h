@@ -15,7 +15,8 @@ struct htab {
 	struct htab_entrylist **elements;
 };
 
-void htab_init(struct htab *tab);
+void htab_init(struct htab *tab, const uint16_t slot_count,
+	       struct htab_entrylist *entrylist[]);
 struct htab *htab_alloc(uint16_t slot_count);
 
 void htab_trunc(struct htab *tab);

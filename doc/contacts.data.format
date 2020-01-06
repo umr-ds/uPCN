@@ -1,12 +1,13 @@
 The following lines show examples for configuration data sent to uPCN.
 
 The colon separated fields represent:
-1. field: ground station eid
-2. field: convergence layer address (e.g. X.25 address)
-3. field: list of nodes' eids available via the ground station
+1. field: node eid, can be suffixed by a comma and an integral reliability value in the range [100, 1000] (will be divided by 1000.0)
+2. field: convergence layer address consisting of the convergence layer and the node address (example: tcpclv3:127.0.0.1:1234)
+3. field: list of eids reachable via the node
 4. field: list of contact times and bandwidth of the contact in the format {from, to, bandwidth in bit/s}
 
 (ipn://35891):(QSPM)::[{1401519306972,1401519316972,500,[(ipn://89326),(ipn://12349)]},{1401519506972,1401519516972,500,[(ipn://89326),(ipn://12349)]}]
 (ipn://35891)::[(ipn://18471),(ipn://81491)]:[{1401519406972,1401819306972,500}]
 (ipn://35891)::[(ipn://89326),(ipn://12349)]:
 (ipn://13714)::[(ipn://18471),(ipn://81491)]:
+(ipn://13714),333::[]:

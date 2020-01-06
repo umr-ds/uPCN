@@ -1,6 +1,8 @@
 #ifndef CONFIGAGENT_H_INCLUDED
 #define CONFIGAGENT_H_INCLUDED
 
+#include "platform/hal_types.h"
+
 #include <stddef.h>
 #include <stdint.h>
 
@@ -12,8 +14,6 @@ struct config_agent_item {
 	size_t data_length;
 };
 
-void callback(const void *data, const size_t length);
-
-int config_agent_setup(void);
+int config_agent_setup(QueueIdentifier_t router_signaling_queue);
 
 #endif /* CONFIGAGENT_H_INCLUDED */

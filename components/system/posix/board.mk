@@ -1,8 +1,0 @@
-
-# COMPILER CONFIG
-
-BASE_CFLAGS_POSIX := -g -Wall
-
-CFLAGS_POSIX   += $(BASE_CFLAGS_POSIX) -std=gnu99
-CXXFLAGS_POSIX += $(BASE_CFLAGS_POSIX) -fno-exceptions -fno-rtti
-

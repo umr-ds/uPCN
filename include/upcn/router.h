@@ -1,20 +1,22 @@
 #ifndef ROUTER_H_INCLUDED
 #define ROUTER_H_INCLUDED
 
+#include "upcn/bundle.h"
+#include "upcn/config.h"
+#include "upcn/node.h"
+#include "upcn/routing_table.h"
+
+#include <stddef.h>
 #include <stdint.h>
 
-#include "upcn/upcn.h"
-#include "upcn/bundle.h"
-#include "upcn/groundStation.h"
-#include "upcn/routingTable.h"
-
 struct router_config {
+	size_t global_mbs;
 	uint16_t fragment_min_payload;
 	float min_probability;
-	float min_gs_confidence_opportunistic;
-	float min_gs_confidence_deterministic;
-	float gs_trustworthiness_weight;
-	float gs_reliability_weight;
+	float min_node_confidence_opportunistic;
+	float min_node_confidence_deterministic;
+	float node_trustworthiness_weight;
+	float node_reliability_weight;
 	uint32_t opt_min_time;
 	uint8_t opt_max_bundles;
 	uint8_t opt_max_pre_bundles;
@@ -41,14 +43,13 @@ struct router_result {
 	uint8_t preemption_improved;
 };
 
-#define TRUSTWORTHINESS(station) (station->trustworthiness)
-#define RELIABILITY(station) ((station->rrnd_info != NULL) \
-	? station->rrnd_info->prob_metrics.reliability : 1.0f)
-#define ROUTER_GS_CONFIDENCE(station) \
-	(RC.gs_trustworthiness_weight * TRUSTWORTHINESS(station) \
-	+ RC.gs_reliability_weight * RELIABILITY(station))
+#define TRUSTWORTHINESS(node) (node->trustworthiness)
+#define RELIABILITY(node) (node->reliability)
+#define ROUTER_NODE_CONFIDENCE(node) \
+	(RC.node_trustworthiness_weight * TRUSTWORTHINESS(node) \
+	+ RC.node_reliability_weight * RELIABILITY(node))
 #define ROUTER_CONTACT_CONFIDENCE(contact, association_prob) \
-	(ROUTER_GS_CONFIDENCE(contact->ground_station) * association_prob)
+	(ROUTER_NODE_CONFIDENCE(contact->node) * association_prob)
 
 #define ROUTER_BUNDLE_PRIORITY(bundle) (bundle_get_routing_priority(bundle))
 #define ROUTER_CONTACT_CAPACITY(contact, prio) \

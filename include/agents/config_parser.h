@@ -1,19 +1,19 @@
 #ifndef CONFIGPARSER_H_INCLUDED
 #define CONFIGPARSER_H_INCLUDED
 
-#include <stdint.h>
-
-#include "upcn/upcn.h"
 #include "upcn/parser.h"
-#include "upcn/routerTask.h"
+#include "upcn/result.h"
+#include "upcn/router_task.h"
+
+#include <stdint.h>
 
 enum config_parser_stage {
 	RP_EXPECT_COMMAND_TYPE,
-	RP_EXPECT_GS_START_DELIMITER,
-	RP_EXPECT_GS_EID,
-	RP_EXPECT_GS_RELIABILITY_SEPARATOR,
-	RP_EXPECT_GS_RELIABILITY,
-	RP_EXPECT_GS_CLA_ADDR_SEPARATOR,
+	RP_EXPECT_NODE_CONF_START_DELIMITER,
+	RP_EXPECT_NODE_CONF_EID,
+	RP_EXPECT_NODE_CONF_RELIABILITY_SEPARATOR,
+	RP_EXPECT_NODE_CONF_RELIABILITY,
+	RP_EXPECT_NODE_CONF_CLA_ADDR_SEPARATOR,
 	RP_EXPECT_CLA_ADDR_START_DELIMITER,
 	RP_EXPECT_CLA_ADDR,
 	RP_EXPECT_CLA_ADDR_NODES_SEPARATOR,
@@ -38,7 +38,8 @@ enum config_parser_stage {
 
 struct config_parser {
 	struct parser *basedata;
-	void (*send_callback)(struct router_command *);
+	void (*send_callback)(struct router_command *, void *);
+	void *send_param;
 	enum config_parser_stage stage;
 	struct router_command *router_command;
 	int current_index;
@@ -49,7 +50,7 @@ struct config_parser {
 
 struct parser *config_parser_init(
 	struct config_parser *parser,
-	void (*send_callback)(struct router_command *));
+	void (*send_callback)(struct router_command *, void *), void *param);
 size_t config_parser_read(struct config_parser *parser,
 	const uint8_t *buffer, size_t length);
 enum upcn_result config_parser_reset(struct config_parser *parser);

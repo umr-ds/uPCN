@@ -1,12 +1,12 @@
 #ifndef SPP_INTERNAL_H
 #define SPP_INTERNAL_H
 
+#include "spp/spp.h"
+#include "spp/spp_timecodes.h"
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stddef.h>
-
-#include "spp/spp.h"
-#include "spp/spp_timecodes.h"
 
 #define SPP_PRIMARY_HEADER_SIZE (6)
 #define SPP_PH_P1_VERSION_MASK (0xe000)

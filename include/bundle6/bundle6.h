@@ -3,19 +3,46 @@
 
 #include "upcn/bundle.h"
 
+#include <stddef.h>
+#include <stdint.h>
+
+struct bundle6_eid_reference {
+	uint16_t scheme_offset;
+	uint16_t ssp_offset;
+};
+
+struct bundle6_eid_info {
+	const char *str_ptr;
+	const char *ssp_ptr;
+	uint16_t dict_scheme_offset;
+	uint16_t dict_ssp_offset;
+};
+
+struct bundle6_dict_descriptor {
+	size_t dict_length_bytes;
+	size_t eid_reference_count;
+	struct bundle6_eid_info destination_eid_info;
+	struct bundle6_eid_info source_eid_info;
+	struct bundle6_eid_info report_to_eid_info;
+	struct bundle6_eid_info custodian_eid_info;
+	// can be written out by memcopying parts and appending zero terminators
+	struct bundle6_eid_info eid_references[];
+};
+
 /**
- * Returns a pointer to the bundle payload data.
+ * Serializes the bundle dictionary into the given buffer
  */
-uint8_t *bundle6_get_payload_data(const struct bundle *bundle, size_t *length);
+void bundle6_serialize_dictionary(char *buf,
+				  const struct bundle6_dict_descriptor *desc);
 
 // ----------------------
 // Bundle and block sizes
 // ----------------------
 
+size_t bundle6_get_dict_length(struct bundle *bundle);
+struct bundle6_dict_descriptor *bundle6_calculate_dict(struct bundle *bundle);
 void bundle6_recalculate_header_length(struct bundle *bundle);
-size_t bundle6_block_get_size(struct bundle_block *block);
 size_t bundle6_get_serialized_size(struct bundle *bundle);
-size_t bundle6_get_serialized_size_without_payload(struct bundle *bundle);
 
 
 // -------------------
@@ -25,14 +52,6 @@ size_t bundle6_get_serialized_size_without_payload(struct bundle *bundle);
 size_t bundle6_get_first_fragment_min_size(struct bundle *bundle);
 size_t bundle6_get_mid_fragment_min_size(struct bundle *bundle);
 size_t bundle6_get_last_fragment_min_size(struct bundle *bundle);
-
-
-// -------------------
-// Bundle manipulation
-// -------------------
-
-enum upcn_result bundle6_set_current_custodian(struct bundle *bundle,
-	const char *schema, const char *ssp);
 
 
 #endif /* BUNDLE6_BUNDLE6_H_INCLUDED */

@@ -1,1 +1,0 @@
-../../../../hal/include/generic/hal_platform.h
